@@ -16,3 +16,7 @@ Tic-Tac-Toe, also known as noughts and crosses or Xs and Os, is a classic paper-
 # LIVE URL
 
 https://bhavdeepsinghnijhawan.github.io/Tic-Tac-Toe/
+
+# CONTRIBUTOR
+
+- [Bhavdeep Singh Nijhawan](https://www.linkedin.com/in/bhavdeep-singh-nijhawan-739634280)
