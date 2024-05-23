@@ -1,15 +1,15 @@
+// Author: Bhavdeep Singh Nijhawan
+
 console.log("Welcome to Tic Tac Toe")
 let music = new Audio("music.mp3")
 let audioTurn = new Audio("ting.mp3")
 let gameover = new Audio("gameover.mp3")
 let turn = "X"
 let isgameover = false;
-
 // Function to change the turn
 const changeTurn = ()=>{
     return turn === "X"? "0": "X"
 }
-
 // Function to check for a win
 const checkWin = ()=>{
     let boxtext = document.getElementsByClassName('boxtext');
@@ -33,7 +33,6 @@ const checkWin = ()=>{
         }
     })
 }
-
 // Game Logic
 // music.play()
 let boxes = document.getElementsByClassName("box");
@@ -51,7 +50,6 @@ Array.from(boxes).forEach(element =>{
         }
     })
 })
-
 // Add onclick listener to reset button
 reset.addEventListener('click', ()=>{
     let boxtexts = document.querySelectorAll('.boxtext');
@@ -64,4 +62,3 @@ reset.addEventListener('click', ()=>{
     document.getElementsByClassName("info")[0].innerText  = "Turn for " + turn;
     document.querySelector('.imgbox').getElementsByTagName('img')[0].style.width = "0px"
 })
-
