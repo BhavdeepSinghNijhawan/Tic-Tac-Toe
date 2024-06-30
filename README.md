@@ -290,6 +290,104 @@ nav ul{
   
 ### JavaScript
 
+```
+console.log("Welcome to Tic Tac Toe");
+
+let turn = "X";
+let isgameover = false;
+```
+
+- **`Console Log:`** Outputs a welcome message to the console when the script runs.
+- **`Variables:`**
+  - **`turn:`** Keeps track of whose turn it is ("X" or "O").
+  - **`isgameover:`** Boolean flag to track whether the game has ended.
+ 
+```
+const changeTurn = () => {
+    return turn === "X" ? "O" : "X";
+};
+```
+
+- This function **`changeTurn`** toggles between "X" and "O" based on the current value of **`turn.`**
+
+```
+const checkWin = () => {
+    let boxtext = document.getElementsByClassName('boxtext');
+    let wins = [
+        [0, 1, 2, 5, 5, 0],
+        [3, 4, 5, 5, 15, 0],
+        [6, 7, 8, 5, 25, 0],
+        [0, 3, 6, -5, 15, 90],
+        [1, 4, 7, 5, 15, 90],
+        [2, 5, 8, 15, 15, 90],
+        [0, 4, 8, 5, 15, 45],
+        [2, 4, 6, 5, 15, 135],
+    ];
+
+    wins.forEach(e => {
+        if((boxtext[e[0]].innerText === boxtext[e[1]].innerText) && 
+           (boxtext[e[2]].innerText === boxtext[e[1]].innerText) && 
+           (boxtext[e[0]].innerText !== "") ) {
+            document.querySelector('.info').innerText = boxtext[e[0]].innerText + " Won";
+            isgameover = true;
+            document.querySelector('.imgbox').getElementsByTagName('img')[0].style.width = "200px";
+            document.querySelector(".line").style.transform = `translate(${e[3]}vw, ${e[4]}vw) rotate(${e[5]}deg)`;
+            document.querySelector(".line").style.width = "20vw";
+        }
+    });
+};
+```
+
+- **`checkWin:`** This function iterates through a set of winning combinations (**`wins`** array) defined as arrays of indices corresponding to the Tic Tac Toe grid positions.
+- For each winning combination, it checks if the inner text of the elements at those indices (**`boxtext`**) match and are not empty.
+- If a winning condition is met, it updates the **`.info`** element to declare the winner, sets **`isgameover`** to true, and animates a line and image box to visualize the winning line.
+
+```
+let boxes = document.getElementsByClassName("box");
+Array.from(boxes).forEach(element => {
+    let boxtext = element.querySelector('.boxtext');
+    element.addEventListener('click', () => {
+        if(boxtext.innerText === '') {
+            boxtext.innerText = turn;
+            turn = changeTurn();
+            checkWin();
+            if (!isgameover) {
+                document.getElementsByClassName("info")[0].innerText = "Turn for " + turn;
+            } 
+        }
+    });
+});
+```
+
+- This section attaches a click event listener to each **`.box`** element on the Tic Tac Toe grid.
+- When a box is clicked (**`element.addEventListener('click', ...)`**):
+  - It checks if the box is empty (**`boxtext.innerText === ''`**).
+  - If empty, it sets the inner text of the box to the current **`turn`**.
+  - Calls **`changeTurn()`** to switch the turn.
+  - Calls **`checkWin()`** to see if the move resulted in a win.
+  - Updates the **`.info`** element to display whose turn it is next.
+
+```
+reset.addEventListener('click', () => {
+    let boxtexts = document.querySelectorAll('.boxtext');
+    Array.from(boxtexts).forEach(element => {
+        element.innerText = "";
+    });
+    turn = "X"; 
+    isgameover = false;
+    document.querySelector(".line").style.width = "0vw";
+    document.getElementsByClassName("info")[0].innerText = "Turn for " + turn;
+    document.querySelector('.imgbox').getElementsByTagName('img')[0].style.width = "0px";
+});
+```
+
+- This part adds a click event listener to the **`reset`** element (assuming there's an HTML element with **`id="reset"`**).
+- When clicked, it resets the game:
+  - Clears the inner text of all **`.boxtext`** elements.
+  - Resets **`turn`** to "X", **`isgameover`** to **`false`**.
+  - Resets visual effects (**`line`** width and **`imgbox`** image width).
+  - Updates **`.info`** to indicate it's "X"'s turn again.
+
 ## CONTRIBUTOR
 
 - [Bhavdeep Singh Nijhawan](https://www.linkedin.com/in/bhavdeep-singh-nijhawan-739634280)
